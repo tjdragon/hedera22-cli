@@ -41,3 +41,23 @@ Finally, the last state from the CLI, you should also see the allowance:
 [main] INFO org.tj.hedera22.CLI -  Participant 1: 199.27539722 ℏ, HHBAR Owned: 50000, HUSD Owned: 50000, HHBAR Allowance: 50000, HUSD Allowance: 50000
 [main] INFO org.tj.hedera22.CLI -  Participant 2: 199.27539722 ℏ, HHBAR Owned: 50000, HUSD Owned: 50000, HHBAR Allowance: 50000, HUSD Allowance: 50000
 ```
+
+## CLI
+Just launch the CLI and enjoy
+
+```text
+[main] INFO org.tj.hedera22.CLI - Hedera Menu. Please select an option:
+[main] INFO org.tj.hedera22.CLI -  Acting account: 0.0.7599 (Operator)
+[main] INFO org.tj.hedera22.CLI -    1. Exit
+[main] INFO org.tj.hedera22.CLI -    2. Allow Trading (~ 1ℏ)
+[main] INFO org.tj.hedera22.CLI -    3. Stop Trading (~ 1ℏ)
+[main] INFO org.tj.hedera22.CLI -    4. Add All Participants (~ 2ℏ)
+[main] INFO org.tj.hedera22.CLI -    5. Select participant (free)
+[main] INFO org.tj.hedera22.CLI -    6. Display order book (~ 7ℏ)
+[main] INFO org.tj.hedera22.CLI -    7. Place Limit Order (~ 1ℏ)
+[main] INFO org.tj.hedera22.CLI -    8. Place Market Order (~ 1ℏ)
+[main] INFO org.tj.hedera22.CLI -    9. Display balances (~ 8ℏ)
+[main] INFO org.tj.hedera22.CLI -    10. Display trading allowed status (~ 0.1ℏ)
+[main] INFO org.tj.hedera22.CLI -    11. Display latest debug (~ 0ℏ)
+[main] INFO org.tj.hedera22.CLI -    12. Reset
+```
