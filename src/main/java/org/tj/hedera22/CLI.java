@@ -48,10 +48,11 @@ public class CLI {
                 logger.info("   6. Display order book (~ 7ℏ)");
                 logger.info("   7. Place Limit Order (~ 1ℏ)");
                 logger.info("   8. Place Market Order (~ 1ℏ)");
-                logger.info("   9. Display balances (~ 8ℏ)");
-                logger.info("   10. Display trading allowed status (~ 0.1ℏ)");
-                logger.info("   11. Display latest debug (~ 0ℏ)");
-                logger.info("   12. Reset");
+                logger.info("   9. Display Settlement Instructions (~ 1ℏ)");
+                logger.info("   10. Display balances (~ 8ℏ)");
+                logger.info("   11. Display trading allowed status (~ 0.1ℏ)");
+                logger.info("   12. Display latest debug (~ 0ℏ)");
+                logger.info("   13. Reset");
 
                 final Scanner in = new Scanner(System.in);
                 final int option = in.nextInt();
@@ -95,20 +96,55 @@ public class CLI {
                 placeMarketOrder();
                 break;
             case 9:
-                displayBalances();
+                displaySettlement();
                 break;
             case 10:
-                displayTradingAllowedStatus();
+                displayBalances();
                 break;
             case 11:
-                debug();
+                displayTradingAllowedStatus();
                 break;
             case 12:
+                debug();
+                break;
+            case 13:
                 reset();
                 break;
             default:
                 logger.warn("Unknown option.");
         }
+    }
+
+    private void displaySettlement() throws PrecheckStatusException, TimeoutException {
+        logger.info("Displaying Settlements");
+        final long numberOfSettlements = numberOfSettlements().longValue();
+
+        for(long index = 0L; index < numberOfSettlements; index++) {
+            final Settlement settlement = getSettlement(BigInteger.valueOf(index));
+            logger.info(settlement.toString());
+        }
+    }
+
+    private BigInteger numberOfSettlements() throws PrecheckStatusException, TimeoutException {
+        final ContractFunctionResult contractUpdateResult = new ContractCallQuery()
+                .setContractId(Contracts.DLOBEX_ACC_ID)
+                .setGas(defaultGas) // gasUsed=2876
+                .setQueryPayment(new Hbar(1))
+                .setFunction("get_number_of_settlements")
+                .execute(client);
+        return contractUpdateResult.getUint256(0);
+    }
+
+    private Settlement getSettlement(final BigInteger index) throws PrecheckStatusException, TimeoutException {
+        final ContractFunctionResult contractUpdateResult = new ContractCallQuery()
+                .setContractId(Contracts.DLOBEX_ACC_ID)
+                .setGas(defaultGas) // gasUsed=2876
+                .setQueryPayment(new Hbar(1))
+                .setFunction("get_settlement", new ContractFunctionParameters()
+                        .addUint256(index))
+                .execute(client);
+        final String raw = Hex.toHexString(contractUpdateResult.asBytes());
+        return DecodeHelper.toSettlement(raw);
     }
 
     private void reset() throws PrecheckStatusException, TimeoutException, ReceiptStatusException {

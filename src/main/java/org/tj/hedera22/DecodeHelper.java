@@ -27,7 +27,7 @@ public class DecodeHelper {
                     new TypeReference<Uint256>() {})
     );
 
-    public static final Function TRADE_TUPLE = new Function("TRADE_TUPLE",
+    public static final Function SETTLEMENT_TUPLE = new Function("SETTLEMENT_TUPLE",
             Arrays.asList(),
             Arrays.asList(
                     new TypeReference<Address>() {},
@@ -35,7 +35,8 @@ public class DecodeHelper {
                     new TypeReference<Address>() {},
                     new TypeReference<Address>() {},
                     new TypeReference<Uint256>() {},
-                    new TypeReference<Address>() {})
+                    new TypeReference<Address>() {},
+                    new TypeReference<Uint256>() {})
     );
 
     public static Order toOrder(final String data) {
@@ -61,16 +62,17 @@ public class DecodeHelper {
         return array.toArray(new BigInteger[]{});
     }
 
-//    public static Trade toTrade(final String data) {
-//        final List<Type> decodeList = FunctionReturnDecoder.decode(data, TRADE_TUPLE.getOutputParameters());
-//        final Trade trade = new Trade(
-//                ((Address)decodeList.get(0)).getValue(),
-//                ((Uint256)decodeList.get(1)).getValue(),
-//                ((Address)decodeList.get(0)).getValue(),
-//                ((Address)decodeList.get(0)).getValue(),
-//                ((Uint256)decodeList.get(4)).getValue(),
-//                ((Address)decodeList.get(0)).getValue()
-//        );
-//        return trade;
-//    }
+    public static Settlement toSettlement(final String data) {
+        final List<Type> decodeList = FunctionReturnDecoder.decode(data, SETTLEMENT_TUPLE.getOutputParameters());
+        final Settlement settlement = new Settlement(
+                ((Address)decodeList.get(0)).getValue(),
+                ((Uint256)decodeList.get(1)).getValue(),
+                ((Address)decodeList.get(0)).getValue(),
+                ((Address)decodeList.get(0)).getValue(),
+                ((Uint256)decodeList.get(4)).getValue(),
+                ((Address)decodeList.get(0)).getValue(),
+                ((Uint256)decodeList.get(4)).getValue()
+        );
+        return settlement;
+    }
 }
