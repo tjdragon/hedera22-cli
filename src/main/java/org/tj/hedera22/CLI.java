@@ -365,7 +365,7 @@ public class CLI {
 
         Collections.reverse(buyOrders);
 
-        logger.info("ORDER BOOK HBAR/BTC");
+        logger.info("ORDER BOOK HBAR/HUSD");
         //           1649254700910 ccf 100 @ 22
         //
         logger.info("-- BUY -------------------- SELL --------------------");
