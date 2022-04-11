@@ -31,7 +31,7 @@ public class ApproveTransfer {
                 .setGas(1_000_000)
                 .setFunction("approve", new ContractFunctionParameters()
                         .addAddress(spender)
-                        .addUint256(BigInteger.valueOf(50_000)))
+                        .addUint256(BigInteger.valueOf(2_000_000)))
                 .execute(client);
 
         final TransactionReceipt receipt = contractExecTransactionResponse.getReceipt(client);
