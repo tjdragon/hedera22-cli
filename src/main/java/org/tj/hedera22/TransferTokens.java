@@ -13,7 +13,7 @@ public class TransferTokens {
     private static final Client client = HederaClient.CLIENT_TESTNET;
 
     public static void main(String[] args) throws PrecheckStatusException, TimeoutException, ReceiptStatusException {
-        client.setOperator(Accounts.OPERATOR_ID, Accounts.OPERATOR_KEY);
+        client.setOperator(Accounts.OPERATOR_ID, PrivateKeys.OPERATOR_KEY);
 
         transfer(Accounts.PARTICIPANT_1.toSolidityAddress(), Contracts.TOKEN_HBAR_ACCOUNT);
         transfer(Accounts.PARTICIPANT_1.toSolidityAddress(), Contracts.TOKEN_USD_ACCOUNT);
