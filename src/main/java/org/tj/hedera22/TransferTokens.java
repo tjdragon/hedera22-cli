@@ -28,7 +28,7 @@ public class TransferTokens {
                 .setGas(1_000_000)
                 .setFunction("transfer", new ContractFunctionParameters()
                         .addAddress(to)
-                        .addUint256(BigInteger.valueOf(50_000)))
+                        .addUint256(BigInteger.valueOf(100_000)))
                 .execute(client);
 
         final TransactionReceipt receipt = contractExecTransactionResponse.getReceipt(client);

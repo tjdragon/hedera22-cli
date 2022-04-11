@@ -67,8 +67,8 @@ public final class DeployERC20 {
                 .setConstructorParameters(
                         new ContractFunctionParameters()
                                 .addUint256(BigInteger.valueOf(2_000_000))
-                                .addString("HBAR")
-                                .addString("HBAR")
+                                .addString("HUSD")
+                                .addString("HUSD")
                 )
                 .execute(client);
 
