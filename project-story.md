@@ -12,8 +12,6 @@ DLOBex is an implementation of a [CLOBs](https://en.wikipedia.org/wiki/Central_l
 - Each participant can add market and limit orders
 - Some of those orders can result in trades where the smart contract performs a swap on-the-behalf of
 - Each DLOBex can be instantiated with any ERC20 token address
-- Publication of custom ERC20s contracts
-- Publication of smart contracts and interactions via a CLI
 
 ## How I built it
 
@@ -35,9 +33,16 @@ Finally, the interaction with the chain, using Java was challenging but several 
 
 ## What I learned
 
-I enjoy learning about Hedera, [Solidity](https://docs.soliditylang.org/) and [Web3J](https://docs.web3j.io/) as well as the integration with a [Hardware Security Module](https://api.docs.cysec.com/) for the key generation and payload signing.
+I enjoy learning about Hedera, Solidity and Web3J as well as the integration with a Hardware Security Module for the key generation and payload signing.
 
 ## What's next for DLOBex
 
 I will be adding when time permits more business rules to orders such as fees handling, penalty for misbehavior, time-based orders,
-price difference enforcement to increase liquidity, writing the trading rule book, and so on.  
+price difference enforcement to increase liquidity, writing the trading rule book, and so on.
+
+## Note on prior work
+
+Since I became aware of Hedera (years ago) - I also thought about CLOBs on Hedera.
+My first implementation was done with the Swirlds SDK (https://www.swirlds.com/) running locally a couple of years ago.
+I have also in my pastime before H22 looked a how CLOBs would work in Solidity and Solana Rust and how to interact with the Test Network using Java.
+
