@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+control JAVA #cyan
+boundary HEDERA #green
+
+== Set-Up ==
+
+alt Account Creation
+JAVA -> HEDERA: Create 2 Accounts\norg.tj.hedera22.CreateAccount\nParticipants 1 & 2
+note left: Create Operator Account\nhttps://portal.hedera.com/register/
+end
+
+alt Transfer HBARs
+JAVA -> HEDERA: Transfer HBARs\norg.tj.hedera22.TransferHBARs
+note left: Transfer HBARs from Operator\nto Participants 1 & 2
+end
+
+alt Deploy ERC20s
+JAVA -> HEDERA: Deploy ERC20s (HHBAR & HUSD)\norg.tj.hedera22.DeployERC20
+note left: Retrieve ERC20s addresses
+end
+
+alt Transfer Tokens
+JAVA -> HEDERA: Transfer Tokens\norg.tj.hedera22.TransferTokens
+note left: Transfer Tokens from Operator\nto Participants 1 & 2
+end
+
+alt Deploy DBLOex
+JAVA -> HEDERA: Deploy DLOBex\norg.tj.hedera22.DeployDLOBEx
+note left: Deploy DBLOex\nwith two ERC20s
+end
+
+alt Approve Tokens
+JAVA -> HEDERA: Approve Tokens\norg.tj.hedera22.ApproveTransfer
+note left: Participants allow DLOBex to\nsettle
+end
+
+@enduml

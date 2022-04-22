@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor PARTICIPANT_1 #yellow
+boundary HEDERA_BLOBex #green
+actor PARTICIPANT_2 #orange
+
+== Placing Limit Orders ==
+PARTICIPANT_1 -> HEDERA_BLOBex: Place Limit Order\n(Verb, Price, Size)
+PARTICIPANT_2 -> HEDERA_BLOBex: Place Limit Order\n(Verb, Price, Size)
+
+== Placing Market Orders ==
+PARTICIPANT_1 -> HEDERA_BLOBex: Place Market Order\n(Verb, Size)
+PARTICIPANT_2 -> HEDERA_BLOBex: Place Market Order\n(Verb, Size)
+
+== On Trade ==
+HEDERA_BLOBex -> HEDERA_BLOBex: Trade Match
+HEDERA_BLOBex -> HEDERA_BLOBex: Create Settlement Instructions
+HEDERA_BLOBex -> PARTICIPANT_1: Transfer ERC20
+HEDERA_BLOBex -> PARTICIPANT_2: Transfer ERC20
+
+@enduml
