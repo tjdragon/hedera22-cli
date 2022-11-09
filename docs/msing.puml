@@ -1,0 +1,51 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor USER
+database STORE
+boundary BACKEND
+boundary EXCHANGE
+database HEDERA
+
+autonumber
+
+group Initialisation
+USER <- STORE: Downloads messaging app (x $)
+USER -> USER: Starts App
+USER -> USER: Ed Key Pair Generation and Storage
+note right: deterministic or not?
+USER -> USER: Buy HBAR
+note right: In app purchase, with a max of 5$
+USER -> BACKEND: Purchase Event
+activate USER
+BACKEND -> EXCHANGE: Get HBAR at Market
+BACKEND -> USER: HBAR associated with Pub Key
+deactivate USER
+end group
+
+group Identifier discoverability
+USER -> HEDERA: Optionally associates a user id to a key\nVia a Smart Contract call
+note right: People can look up others via this mechanism
+end group
+
+group Exchange of Public Keys - Scenario 1
+USER -> HEDERA: Lookup by id
+end group
+
+group Exchange of Public Keys - Scenario 2
+USER -> USER: Meet in person and scan QR code
+note right: Most secure option
+end group
+
+group Send secure message
+USER -> USER: Selects recipient by id or by saved QR
+USER -> USER: Writes message, encrypts message with recipient's public key
+USER -> HEDERA: Invokes smart contract with encrypted message
+end group
+
+group Polls secure message
+USER -> HEDERA: Polls for messages
+USER -> USER: Decrypts locally, delete in the smart contract
+end group
+
+@enduml
